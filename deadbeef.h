@@ -1142,6 +1142,7 @@ typedef struct {
 
     // system directory API, returns path by id from ddb_sys_directory_t enum
     const char *(*get_system_dir) (int dir_id);
+    void (*log)(const char * msg);
 #endif
 } DB_functions_t;
 

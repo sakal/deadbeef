@@ -413,6 +413,18 @@ on_helpwindow_key_press_event          (GtkWidget       *widget,
     return FALSE;
 }
 
+gboolean
+on_logwindow_key_press_event           (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+    if (event->keyval == GDK_Escape) {
+        gtk_widget_hide (widget);
+    }
+    return FALSE;
+}
+
+
 // defined in plcommon.c
 extern int editcolumn_title_changed;
 

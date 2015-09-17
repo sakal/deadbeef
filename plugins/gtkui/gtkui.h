@@ -157,7 +157,10 @@ void
 gtkui_show_info_window (const char *fname, const char *title, GtkWidget **pwindow);
 
 void
-on_gtkui_info_window_delete (GtkWidget *widget, GtkTextDirection previous_direction, GtkWidget **pwindow);
+gtkui_show_log_window (const char *msg, GtkWidget * log_window);
+
+void
+on_gtkui_info_window_delete (GtkWidget *widget, GtkTextDirection previous_direction, gpointer data);
 
 GtkWidget*
 gtkui_create_pltmenu (int plt_idx);

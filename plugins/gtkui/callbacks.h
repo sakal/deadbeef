@@ -357,6 +357,10 @@ gboolean
 on_helpwindow_key_press_event          (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data);
+gboolean
+on_logwindow_key_press_event          (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data);
 
 void
 on_preferences_activate                (GtkMenuItem     *menuitem,

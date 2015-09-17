@@ -996,6 +996,47 @@ create_helpwindow (void)
 }
 
 GtkWidget*
+create_logwindow (void)
+{
+  GtkWidget *logwindow;
+  GtkWidget *scrolledwindow1;
+  GtkWidget *logtext;
+
+  logwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_size_request (logwindow, 600, 400);
+  gtk_widget_set_events (logwindow, GDK_KEY_PRESS_MASK);
+  gtk_window_set_title (GTK_WINDOW (logwindow), _("Log"));
+  /*gtk_window_set_modal (GTK_WINDOW (helpwindow), TRUE);*/
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (logwindow), TRUE);
+  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (logwindow), TRUE);
+  gtk_window_set_skip_pager_hint (GTK_WINDOW (logwindow), TRUE);
+
+  scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolledwindow1);
+  gtk_container_add (GTK_CONTAINER (logwindow), scrolledwindow1);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow1), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  logtext = gtk_text_view_new ();
+  gtk_widget_show (logtext);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow1), logtext);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (logtext), FALSE);
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (logtext), GTK_WRAP_WORD);
+  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (logtext), 10);
+  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (logtext), 10);
+
+  g_signal_connect ((gpointer) logwindow, "key_press_event",
+                    G_CALLBACK (on_logwindow_key_press_event),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (logwindow, helpwindow, "helpwindow");
+  GLADE_HOOKUP_OBJECT (logwindow, scrolledwindow1, "scrolledwindow1");
+  GLADE_HOOKUP_OBJECT (logwindow, logtext, "logtext");
+
+  return logwindow;
+}
+
+GtkWidget*
 create_trackproperties (void)
 {
   GtkWidget *trackproperties;

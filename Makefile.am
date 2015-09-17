@@ -43,7 +43,8 @@ deadbeef_SOURCES =\
 	escape.c escape.h\
 	tf.c tf.h\
 	playqueue.c playqueue.h\
-	sort.c sort.h
+	sort.c sort.h\
+	log.c log.h
 	
 #	ConvertUTF/ConvertUTF.c ConvertUTF/ConvertUTF.h
 

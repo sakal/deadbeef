@@ -1191,6 +1191,35 @@ gtkui_show_info_window (const char *fname, const char *title, GtkWidget **pwindo
     gtk_widget_show (widget);
 }
 
+void
+on_gtkui_log_window_delete (GtkWidget *widget, GtkTextDirection previous_direction, gpointer data) {
+    gtk_widget_hide (widget);
+    gtk_widget_destroy (widget);
+}
+
+void
+gtkui_show_log_window (const char *msg, GtkWidget * log_window) {
+
+    if (!log_window)
+    {
+        log_window = create_logwindow ();
+        g_signal_connect (widget, "delete_event", G_CALLBACK (on_gtkui_log_window_delete), NULL);
+        gtk_window_set_title (GTK_WINDOW (log_window), _("Log window"));
+        gtk_window_set_transient_for (GTK_WINDOW (log_window), GTK_WINDOW (mainwin));
+    }
+
+    GtkWidget *logtext = lookup_widget (log_window, "logtext");
+    GtkTextBuffer *buffer = gtk_text_buffer_new (NULL);
+    GtkTextIter * iter;
+
+    gtk_text_buffer_get_iter_at_offset ( buffer, iter, -1 );
+    gtk_text_buffer_insert (buffer, iter, msg, strlen(msg));
+
+    gtk_text_view_set_buffer (GTK_TEXT_VIEW (txt), buffer);
+    g_object_unref (buffer);
+    gtk_widget_show (widget);
+}
+
 gboolean
 gtkui_quit_cb (void *ctx) {
     if (deadbeef->have_background_jobs ()) {

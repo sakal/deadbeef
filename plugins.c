@@ -58,6 +58,7 @@
 #include "tf.h"
 #include "playqueue.h"
 #include "sort.h"
+#include "log.h"
 
 #define trace(...) { fprintf(stderr, __VA_ARGS__); }
 //#define trace(fmt,...)
@@ -394,6 +395,7 @@ static DB_functions_t deadbeef_api = {
     .playqueue_insert_at = (void (*) (int n, DB_playItem_t *it))playqueue_insert_at,
 
     .get_system_dir = plug_get_system_dir,
+    .log = (void (*) (const char * msg))ddb_log,
 };
 
 DB_functions_t *deadbeef = &deadbeef_api;
